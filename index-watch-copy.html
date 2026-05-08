@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>VueJS</title>
+</head>
+
+<body>
+  <div id="app">
+    <label>CEP</label>
+    <input v-model="cep" type="text" placeholder="59028-892">
+    <p>Informações de Endereço</p>
+    <ul>
+      <li v-for="(valor, chave) in endereco">{{chave}}: {{valor}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        cep: "",
+        endereco: {}
+      },
+      methods: {
+        puxarEndereco(numeroCep) {
+          const arrayCep = numeroCep.split("")
+          arrayCep[5] = ""
+          const soNumeroCep = arrayCep.join("")
+          console.log(soNumeroCep)
+          fetch(`https://viacep.com.br/ws/${soNumeroCep}/json/`)
+            .then(response => response.json())
+            .then(json => this.endereco = json)
+        }
+      },
+      watch: {
+        cep(novoCep, antigoCep) {
+          if (novoCep.length < antigoCep.length) {
+            console.log("apagando")
+            return
+          }
+          else {
+            if (novoCep.length === 9) {
+              this.puxarEndereco(novoCep)
+            }
+            if (novoCep.length > 9) {
+              this.cep = novoCep.substring(0, 9)
+              return
+            }
+            if (novoCep.includes("-")) return
+            if (novoCep.length >= 5) {
+              const arrayCep = novoCep.split("")
+              arrayCep.splice(5, 0, "-")
+              this.cep = arrayCep.join("")
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

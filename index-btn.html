@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>VueJS</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Criador de Botoes</h1>
+    <p>Escolha as caracteŕisticas dos seus botões</p>
+
+    <div style="display: flex; flex-direction: column;">
+      <label for="width">Largura</label>
+      <input v-model="width" type="range" name="width" id="width">
+      <label for="height">Altura</label>
+      <input v-model="height" type="range" name="height" id="height">
+      <label for="fontSize">Tamanho da Fonte</label>
+      <input v-model="fontSize" type="range" name="fontSize" id="fontSize">
+      <label for="fontFamily">Tamanho da Fonte</label>
+      <select v-model="fontFamily" name="fontFamily" id="fontFamily">
+        <option disabled value="">Selecione uma fonte</option>
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Courier">Courier</option>
+      </select>
+      <label for="textAlign">Alinhamento do Texto</label>
+      <select v-model="textAlign" name="textAlign" id="textAlign">
+        <option disabled value="">Escolha um alinhamento</option>
+        <option value="center">Centro</option>
+        <option value="left">Esquerda</option>
+        <option value="right">Direta</option>
+      </select>
+      <label for="background">Cor de Fundo</label>
+      <input v-model="background" type="color" name="background" id="background">
+      <label for="color">Cor da Fonte</label>
+      <input v-model="color" type="color" name="color" id="color">
+      <label for="borderRadius">Arredondamento da Borda</label>
+      <input v-model="borderRadius" max="20" type="range" name="borderRadius" id="borderRadius">
+    </div>
+
+    <h2>Botão Pronto</h2>
+    <button
+      :style="{color: color, background: background, fontFamily: fontFamily, textAlign: textAlign, width: width+'px', height: height+'px', borderRadius: borderRadius+'px', fontSize: fontSize+'px'}">Texto</button>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        width: 50,
+        height: 30,
+        fontSize: 16,
+        fontFamily: "",
+        textAlign: "",
+        background: "#ffffff",
+        color: "#111111",
+        borderRadius: 4
+      }
+    })
+  </script>
+
+  <!-- 
+  1 - Crie um criador de botões.
+
+  O usuário poderá definir:
+  width,
+  height,
+  font-size,
+  font-family,
+  text-align,
+  background,
+  color,
+  border-radius,
+
+  As escolhas serão feitas em campos de
+  formulário. Cada escolha deverá ser 
+  refletida em um elemento (o botão).
+
+
+  2 - Crie um formulário com, nome, email, telefone e mensagem.
+  Ao clicar em enviar, as informações preenchidas no formulário
+  devem aparecer abaixo do mesmo. (previna o comportamento padrão do botão enviar)
+ -->
+
+</body>
+
+</html>

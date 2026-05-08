@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ptBR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Techno</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="produto in produtos">
+                <img :src="produto.img" alt="">
+                <p>Nome: {{produto.nome}}</p>
+                <p>Preço: R$ {{produto.preco}}</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
